@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,19 @@
     <script defer src="scripts/board.js"></script>
     <script defer src="scripts/main.js"></script>
 </head>
+
 <body>
+    <!--Templates-->
+    <template id="cardTemplate">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front"></div>
+                <div class="flip-card-back">
+                    <img src="images/heros/card01.jpeg" alt="">
+                </div>
+            </div>
+        </div>
+    </template>
     <!--Board-->
     <div id="board" class="hidden"></div>
     <!--Menu-->
@@ -22,6 +35,7 @@
             <select name="numCards" id="numCards"></select>
             <button id="start">start</button>
         </div>
-    </main>    
+    </main>
 </body>
+
 </html>

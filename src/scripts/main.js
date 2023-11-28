@@ -3,6 +3,13 @@ const menu = document.getElementById('menu');
 const select = document.getElementById('numCards');
 const start = document.getElementById('start');
 
+// Functions
+function buildUrl(){}
+
+// Object instances
+const card = new CardManager(buildUrl);
+const board = new BoardManager("board", 50, card);
+
 // Configuring the menu
 for ( let i = 4; i<=10; i+=2){
     const n = i*i; // Get i²
@@ -20,8 +27,9 @@ for ( let i = 4; i<=10; i+=2){
 // Event listeners
 start.addEventListener('click', ()=>{
     menu.classList.add('hidden');
-    board.classList.remove('hidden');
+    board.node.classList.remove('hidden');
+    board.fill(select.value);
 });
 
 // Development code
-start.click();
+// start.click();
