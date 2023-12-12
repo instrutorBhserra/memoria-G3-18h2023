@@ -14,6 +14,13 @@ class CardManager{
         const template = document.getElementById('cardTemplate');
         const clone = template.content.cloneNode(true);
 
+        // Get a reference to the image element
+        const img = clone.querySelector('img');
+
+        // Change the source of the image
+        img.setAttribute('src', this.urlFactory(heroNumber));
+
+        // Handle card clicks
         clone.children[0].addEventListener('click', 
              event=>this.onClick(event)
         );
@@ -23,7 +30,11 @@ class CardManager{
 
     // Handle click events
     onClick(event){
-        this.flip(event.target);
+        if(this.flippedCards.size == 2 ){
+            this.endTurn();
+        }else{
+            this.flip(event.target);
+        }
     }
 
     // Flip the received card
@@ -42,6 +53,27 @@ class CardManager{
     disable(cardNode){
         cardNode.children[0].classList.add('matched');
         this.unFlip(cardNode);
+    }
+
+    // Turn methods
+
+    // Check if is a match
+    check(){
+        const urls = [...this.flippedCards].map((card)=> card.querySelector('img').src);
+        return urls[0]==urls[1];
+    };
+
+
+    // // Finsh a turn
+    endTurn(){
+        // Choose the function to end the turn
+        // If is a match, disable cards
+        // Else unflip the cards
+        const handler = this.check()?(card)=>this.disable(card):this.unFlip;
+        // Run the handler in both flipped cards
+        this.flippedCards.forEach(handler);
+        // Empty the set
+        this.flippedCards.clear();
     }
 
 }

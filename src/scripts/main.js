@@ -4,7 +4,14 @@ const select = document.getElementById('numCards');
 const start = document.getElementById('start');
 
 // Functions
-function buildUrl(){}
+function buildUrl(number){
+    // Turning the number into a string
+    number+='';
+    // Adding a 0 to the left of a small number
+    number = number.padStart(2,'0');
+
+    return `images/heros/card${number}.jpeg`;
+}
 
 // Object instances
 const card = new CardManager(buildUrl);
@@ -29,6 +36,15 @@ start.addEventListener('click', ()=>{
     menu.classList.add('hidden');
     board.node.classList.remove('hidden');
     board.fill(select.value);
+});
+
+board.node.addEventListener('click',()=>{
+    if(board.check()){
+        setTimeout(()=>{
+            menu.classList.remove('hidden');
+            board.node.classList.add('hidden');
+        }, 2000);
+    }
 });
 
 // Development code
